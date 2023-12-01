@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "edm"
+version = "0.1.0"
+description = "Electronic document management"
+authors = ["Kagadi Andrei <kagadi.a@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+django = "^4.2.7"
+pillow = "^10.1.0"
+requests = "^2.31.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
