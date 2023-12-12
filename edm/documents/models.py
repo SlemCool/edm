@@ -2,8 +2,34 @@ from django.db import models
 from users.models import User
 
 
+class Organization(models.Model):
+    """Модель для списка организаций"""
+
+    name = models.CharField(
+        verbose_name="Название организации",
+        max_length=100,
+        blank=False,
+    )
+
+
 class Document(models.Model):
     """Модель для создания документа"""
+
+    INPUT_DOC = "ВХ"
+    OUTPUT_DOC = "ИС"
+    IN_OUT_DOC = "ВХ-ИС"
+    DOCUMENT_TYPE_CHOICES = [
+        (INPUT_DOC, "входящий"),
+        (OUTPUT_DOC, "исходящий"),
+        (IN_OUT_DOC, "входящий-исходящий"),
+    ]
+    doc_type = models.CharField(
+        verbose_name="Тип документа",
+        help_text="Укажите тип документа",
+        max_length=2,
+        choices=DOCUMENT_TYPE_CHOICES,
+        blank=False,
+    )
 
     reg = models.ForeignKey(
         Reg, related_name="doc_reg", on_delete=models.CASCADE, blank=True, null=True
