@@ -11,6 +11,14 @@ class Organization(models.Model):
         blank=False,
     )
 
+    def __str__(self) -> str:
+        return self.name
+
+    class Meta:
+        ordering = ["-name"]
+        verbose_name = "Организация"
+        verbose_name_plural = "Организации"
+
 
 class Numeration(models.Model):
     """Модель для счетчиков"""
@@ -20,6 +28,14 @@ class Numeration(models.Model):
         verbose_name="Текущий номер", blank=False, null=False
     )
 
+    def __str__(self) -> str:
+        return self.name + " - " + self.num
+
+    class Meta:
+        ordering = ["-id"]
+        verbose_name = "Нумерация"
+        verbose_name_plural = "Нумерация"
+
 
 class Theme(models.Model):
     """Модель для списка тем документа"""
@@ -27,6 +43,14 @@ class Theme(models.Model):
     name = models.CharField(
         verbose_name="Тема документа", max_length=100, blank=False, null=False
     )
+
+    def __str__(self) -> str:
+        return self.name
+
+    class Meta:
+        ordering = ["-name"]
+        verbose_name = "Тема"
+        verbose_name_plural = "Темы"
 
 
 class Detail(models.Model):
@@ -36,6 +60,14 @@ class Detail(models.Model):
         verbose_name="Подробно для документа", max_length=100, blank=False, null=False
     )
 
+    def __str__(self) -> str:
+        return self.name
+
+    class Meta:
+        ordering = ["-name"]
+        verbose_name = "Подробно"
+        verbose_name_plural = "Подробности"
+
 
 class Given(models.Model):
     """Модель для типа передачи документа"""
@@ -44,13 +76,29 @@ class Given(models.Model):
         verbose_name="Тип передачи документа", max_length=100, blank=False, null=False
     )
 
+    def __str__(self) -> str:
+        return self.name
+
+    class Meta:
+        ordering = ["-name"]
+        verbose_name = "Тип передачи"
+        verbose_name_plural = "Типы передачи"
+
 
 class Implementers(models.Model):
     """Модель для исполнителей документа"""
 
     name = models.CharField(
-        verbose_name="ФИО исполнителя", max_length=50, blank=False, null=False
+        verbose_name="Исполнитель", max_length=50, blank=False, null=False
     )
+
+    def __str__(self) -> str:
+        return self.name
+
+    class Meta:
+        ordering = ["-name"]
+        verbose_name = "Исполнитель"
+        verbose_name_plural = "Исполнители"
 
 
 class Document(models.Model):
@@ -123,13 +171,13 @@ class Document(models.Model):
         blank=True,
         null=True,
     )
-    date_input = models.DateTimeField(
+    date_input_doc = models.DateTimeField(
         verbose_name="Дата входящего",
         help_text="Укажите дату входящего документа",
         blank=True,
         null=True,
     )
-    date_output = models.DateTimeField(
+    date_output_doc = models.DateTimeField(
         verbose_name="Дата исходящего",
         help_text="Укажите дату исходящего документа",
         blank=True,
@@ -143,10 +191,18 @@ class Document(models.Model):
         verbose_name="Автор создания",
     )
     modified_date = models.DateTimeField(
-        'Дата изменения',
+        "Дата изменения",
         auto_add=True,
     )
     created_date = models.DateTimeField(
-        'Дата публикации',
+        "Дата публикации",
         auto_now_add=True,
     )
+
+    def __str__(self) -> str:
+        return self.doc_type + " " + self.theme + " " + self.author
+
+    class Meta:
+        ordering = ["-id"]
+        verbose_name = "Документ"
+        verbose_name_plural = "Документы"
