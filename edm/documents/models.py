@@ -19,7 +19,7 @@ class Organization(models.Model):
         return self.name
 
     class Meta:
-        ordering = ["-name"]
+        ordering = ["name"]
         verbose_name = "Организация"
         verbose_name_plural = "Организации"
 
@@ -36,7 +36,7 @@ class Numeration(models.Model):
         return self.name + " - " + str(self.num)
 
     class Meta:
-        ordering = ["-id"]
+        ordering = ["id"]
         verbose_name = "Нумерация"
         verbose_name_plural = "Нумерация"
 
@@ -52,7 +52,7 @@ class Theme(models.Model):
         return self.name
 
     class Meta:
-        ordering = ["-name"]
+        ordering = ["name"]
         verbose_name = "Тема"
         verbose_name_plural = "Темы"
 
@@ -68,7 +68,7 @@ class Detail(models.Model):
         return self.name
 
     class Meta:
-        ordering = ["-name"]
+        ordering = ["name"]
         verbose_name = "Подробно"
         verbose_name_plural = "Подробности"
 
@@ -84,7 +84,7 @@ class Given(models.Model):
         return self.name
 
     class Meta:
-        ordering = ["-name"]
+        ordering = ["name"]
         verbose_name = "Тип передачи"
         verbose_name_plural = "Типы передачи"
 
@@ -100,7 +100,7 @@ class Implementers(models.Model):
         return self.name
 
     class Meta:
-        ordering = ["-name"]
+        ordering = ["name"]
         verbose_name = "Исполнитель"
         verbose_name_plural = "Исполнители"
 
@@ -123,13 +123,21 @@ class Document(models.Model):
         choices=DOCUMENT_TYPE_CHOICES,
         blank=False,
     )
-    from_where = models.ForeignKey(
+    from_doc = models.ForeignKey(
         Organization,
         related_name="org_from",
         on_delete=models.PROTECT,
         blank=True,
         null=True,
-        verbose_name="Откуда-Куда",
+        verbose_name="Откуда",
+    )
+    where_doc = models.ForeignKey(
+        Organization,
+        related_name="org_where",
+        on_delete=models.PROTECT,
+        blank=True,
+        null=True,
+        verbose_name="Куда",
     )
     area = models.CharField(
         verbose_name="Участок", max_length=100, blank=True, null=True
@@ -186,13 +194,13 @@ class Document(models.Model):
         null=True,
         verbose_name="Исполнитель",
     )
-    date_input_doc = models.DateTimeField(
+    date_input_doc = models.DateField(
         verbose_name="Дата входящего",
         help_text="Укажите дату входящего документа",
         blank=True,
         null=True,
     )
-    date_output_doc = models.DateTimeField(
+    date_output_doc = models.DateField(
         verbose_name="Дата исходящего",
         help_text="Укажите дату исходящего документа",
         blank=True,
@@ -216,7 +224,7 @@ class Document(models.Model):
     )
 
     def __str__(self) -> str:
-        theme = self.theme if self.theme else "Без темы"
+        theme = str(self.theme) if self.theme else "Без темы"
         return (
             self.doc_type + " - " + theme + " - " + str(self.author)
         )

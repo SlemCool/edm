@@ -14,21 +14,22 @@ from .models import (
 @admin.register(Document)
 class DocumentAdmin(admin.ModelAdmin):
     list_display = (
-        "id",
         "doc_type",
-        "from_where",
-        "area",
-        "who",
         "input_num",
         "output_num",
+        "from_doc",
+        "where_doc",
+        "area",
+        "who",
         "theme",
-        "detail",
-        "given",
         "description",
         "implementers",
     )
     search_fields = (
-        "from_where",
+        "input_num",
+        "output_num",
+        "from_doc",
+        "where_doc",
         "area",
         "who",
         "theme",
@@ -67,7 +68,6 @@ class ThemeAdmin(admin.ModelAdmin):
         "id",
     )
     search_fields = ("name",)
-    list_filter = ("name",)
     empty_value_display = "-пусто-"
 
 
@@ -78,7 +78,6 @@ class DetailAdmin(admin.ModelAdmin):
         "id",
     )
     search_fields = ("name",)
-    list_filter = ("name",)
     empty_value_display = "-пусто-"
 
 
@@ -89,7 +88,6 @@ class GivenAdmin(admin.ModelAdmin):
         "id",
     )
     search_fields = ("name",)
-    list_filter = ("name",)
     empty_value_display = "-пусто-"
 
 
@@ -100,5 +98,4 @@ class ImplementersAdmin(admin.ModelAdmin):
         "id",
     )
     search_fields = ("name",)
-    list_filter = ("name",)
     empty_value_display = "-пусто-"
