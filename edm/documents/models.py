@@ -1,5 +1,9 @@
+from django.contrib.auth import get_user_model
 from django.db import models
-from users.models import User
+
+# from users.models import User
+
+User = get_user_model()
 
 
 class Organization(models.Model):
@@ -29,7 +33,7 @@ class Numeration(models.Model):
     )
 
     def __str__(self) -> str:
-        return self.name + " - " + self.num
+        return self.name + " - " + str(self.num)
 
     class Meta:
         ordering = ["-id"]
@@ -125,9 +129,12 @@ class Document(models.Model):
         on_delete=models.PROTECT,
         blank=True,
         null=True,
+        verbose_name="Откуда-Куда",
     )
-    area = models.CharField(max_length=100, blank=True, null=True)
-    who = models.CharField(max_length=100, blank=True, null=True)
+    area = models.CharField(
+        verbose_name="Участок", max_length=100, blank=True, null=True
+    )
+    who = models.CharField(verbose_name="Кто", max_length=100, blank=True, null=True)
 
     input_num = models.PositiveIntegerField(
         verbose_name="Входящий номер", blank=True, null=True
@@ -141,6 +148,7 @@ class Document(models.Model):
         on_delete=models.PROTECT,
         blank=True,
         null=True,
+        verbose_name="Тема",
     )
     detail = models.ForeignKey(
         Detail,
@@ -148,6 +156,7 @@ class Document(models.Model):
         on_delete=models.PROTECT,
         blank=True,
         null=True,
+        verbose_name="Детали",
     )
     given = models.ForeignKey(
         Given,
@@ -155,9 +164,14 @@ class Document(models.Model):
         on_delete=models.PROTECT,
         blank=True,
         null=True,
+        verbose_name="Передано",
     )
-    file = models.FileField(upload_to="docs/%Y/%m/%d/", blank=True, null=True)
-    size = models.PositiveIntegerField(blank=True, null=True)
+    file = models.FileField(
+        verbose_name="Файл", upload_to="docs/%Y/%m/%d/", blank=True, null=True
+    )
+    size = models.PositiveIntegerField(
+        verbose_name="Размер файла", blank=True, null=True
+    )
     description = models.TextField(
         verbose_name="Прочее",
         help_text="Укажите прочие подробности",
@@ -170,6 +184,7 @@ class Document(models.Model):
         on_delete=models.PROTECT,
         blank=True,
         null=True,
+        verbose_name="Исполнитель",
     )
     date_input_doc = models.DateTimeField(
         verbose_name="Дата входящего",
@@ -187,12 +202,13 @@ class Document(models.Model):
     author = models.ForeignKey(
         User,
         on_delete=models.SET_NULL,
+        null=True,
         related_name="author_doc",
         verbose_name="Автор создания",
     )
     modified_date = models.DateTimeField(
         "Дата изменения",
-        auto_add=True,
+        auto_now=True,
     )
     created_date = models.DateTimeField(
         "Дата публикации",
@@ -200,7 +216,10 @@ class Document(models.Model):
     )
 
     def __str__(self) -> str:
-        return self.doc_type + " " + self.theme + " " + self.author
+        theme = self.theme if self.theme else "Без темы"
+        return (
+            self.doc_type + " - " + theme + " - " + str(self.author)
+        )
 
     class Meta:
         ordering = ["-id"]
