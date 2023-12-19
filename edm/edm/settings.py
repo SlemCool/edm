@@ -29,7 +29,7 @@ INSTALLED_APPS = [
     "debug_toolbar",
     "documents.apps.DocumentsConfig",
     "users.apps.UsersConfig",
-    'core.apps.CoreConfig', 
+    "core.apps.CoreConfig",
 ]
 
 MIDDLEWARE = [
@@ -44,7 +44,7 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = "edm.urls"
-TEMPLATES_DIR = os.path.join(BASE_DIR, 'templates')
+TEMPLATES_DIR = os.path.join(BASE_DIR, "templates")
 
 TEMPLATES = [
     {
@@ -111,12 +111,12 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 STATIC_URL = "/static/"
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
 
 # Путь к директории, куда будут загружаться файлы пользователей
 
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = "/media/"
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
@@ -129,3 +129,9 @@ INTERNAL_IPS = [
 
 # Настройки количество записей на странице.
 HOW_MANY_DOCUMENTS = 10
+
+# Эти константы указывают адреса страниц,
+# на которые пользователь будет перенаправлен в той или иной ситуации.
+LOGIN_URL = "users:login"
+LOGIN_REDIRECT_URL = "documents:index"
+# LOGOUT_REDIRECT_URL = "documents:index"
