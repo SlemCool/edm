@@ -3,9 +3,9 @@
   {% with request.resolver_match.view_name as view_name %}
   <nav class="navbar navbar-expand-lg navbar-light" style="background-color: lightskyblue">
     <div class="container">
-      <a class="navbar-brand" href="{% url 'posts:index' %}">
+      <a class="navbar-brand" href="{% url 'documents:index' %}">
         <img src="{% static 'img/logo.png' %}" width="30" height="30" class="d-inline-block align-top" alt="">
-        <span style="color:red">СПБ №7</span>tube
+        <span style="color:black">СПБ №7</span>
       </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent"
         aria-controls="navbarContent" aria-expanded="false">
@@ -14,12 +14,12 @@
 
     <div class="collapse navbar-collapse" id="navbarContent">
       <ul class="navbar-nav nav-pills ms-auto mb-2">
-        <li class="nav-item">
+        {% comment %} <li class="nav-item">
           <a class="nav-link {% if view_name  == 'about:author' %}active{% endif %}" href="{% url 'about:author' %}">Об авторе</a>
-        </li>
+        </li> {% endcomment %}
         {% if user.is_authenticated %}
         <li class="nav-item">
-          <a class="nav-link" href="{% url 'posts:post_create' %}">Новая запись</a>
+          <a class="nav-link" href="{% url 'documents:document_create' %}">Новая запись</a>
         </li>
         <li class="nav-item">
           <a class="nav-link link-light" href="{% url 'users:password_change' %}">Изменить пароль</a>
@@ -28,7 +28,7 @@
           <a class="nav-link link-light" href="{% url 'users:logout' %}">Выйти</a>
         </li>
         <li class="nav-item navbar-text">
-          <a href="{% url 'posts:profile' user.username %}">Пользователь: {{ user.username }}</a>
+          <a class="text-black-50"> Вы вошли как: "{{ user.username }}"</a>
         </li>
         {% else %}
         <li class="nav-item">

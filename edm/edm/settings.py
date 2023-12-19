@@ -29,6 +29,7 @@ INSTALLED_APPS = [
     "debug_toolbar",
     "documents.apps.DocumentsConfig",
     "users.apps.UsersConfig",
+    'core.apps.CoreConfig', 
 ]
 
 MIDDLEWARE = [
@@ -125,3 +126,6 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 INTERNAL_IPS = [
     "127.0.0.1",
 ]
+
+# Настройки количество записей на странице.
+HOW_MANY_DOCUMENTS = 10

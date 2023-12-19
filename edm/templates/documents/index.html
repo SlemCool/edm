@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block title %}Документы{% endblock title %}
+{% block content %}
+  {% include "documents/includes/switcher.html" %}
+  <h1>Последние документы</h1>
+  {% for document in page_obj %}
+    {% include "documents/includes/show_document.html" %}
+    {% if not forloop.last %}<hr/>{% endif %}
+  {% endfor %}
+  {% include "documents/includes/paginator.html" %}
+{% endblock content %}
