@@ -1,11 +1,30 @@
 {% extends "base.html" %}
 {% block title %}Документы{% endblock title %}
 {% block content %}
+  {% if user.is_authenticated %}
+    <p class="text-black-50">Вы вошли как: "{{ user.username.get_full_name }}"</p>
+  {% else %}
+    <p class="text-bg-danger">Для начала работы авторизуйтесь!</p>
+  {% endif %}
   {% include "documents/includes/switcher.html" %}
-  <h1>Последние документы</h1>
-  {% for document in page_obj %}
-    {% include "documents/includes/show_document.html" %}
-    {% if not forloop.last %}<hr/>{% endif %}
-  {% endfor %}
+  <h2>Последние документы</h2>
+  <hr/>
+  <table class="table table-striped">
+    <caption>Список документов</caption>
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Тип документа</th>
+        <th scope="col">Откуда</th>
+        <th scope="col">Куда</th>
+        <th scope="col">Исполнитель</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for document in page_obj %}
+        {% include "documents/includes/show_document.html" %}
+      {% endfor %}
+    </tbody>
+  </table>
   {% include "documents/includes/paginator.html" %}
 {% endblock content %}

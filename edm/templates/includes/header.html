@@ -14,25 +14,22 @@
 
     <div class="collapse navbar-collapse" id="navbarContent">
       <ul class="navbar-nav nav-pills ms-auto mb-2">
-        {% comment %} <li class="nav-item">
-          <a class="nav-link {% if view_name  == 'about:author' %}active{% endif %}" href="{% url 'about:author' %}">Об авторе</a>
-        </li> {% endcomment %}
         {% if user.is_authenticated %}
         <li class="nav-item">
-          <a class="nav-link" href="{% url 'documents:document_create' %}">Новая запись</a>
+          <a type="button" class="btn btn-success" href="{% url 'documents:document_create' %}">Новый документ</a>
         </li>
         <li class="nav-item">
           <a class="nav-link link-light" href="{% url 'users:password_change' %}">Изменить пароль</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link link-light" href="{% url 'users:logout' %}">Выйти</a>
-        </li>
-        <li class="nav-item navbar-text">
-          <a class="text-black-50"> Вы вошли как: "{{ user.username }}"</a>
+          <form method="post" action="{% url 'users:logout' %}">
+            {% csrf_token %}
+            <button class="btn btn-danger">Выйти</button>
+          </form>
         </li>
         {% else %}
         <li class="nav-item">
-          <a class="nav-link link-light" href="{% url 'users:login' %}">Войти</a>
+          <a class="btn btn-warning" href="{% url 'users:login' %}">Войти</a>
         </li>
         <li class="nav-item">
           <a class="nav-link link-light" href="{% url 'users:signup' %}">Регистрация</a>
