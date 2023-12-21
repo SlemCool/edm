@@ -8,8 +8,29 @@ from .utils import paginator
 
 def index(request):
     template = "documents/index.html"
-    # documents = Document.objects.all()
     documents = Document.objects.select_related("from_doc", "where_doc").all()
+    context = {
+        "page_obj": paginator(documents, request),
+    }
+    return render(request, template, context)
+
+
+def document_incoming(request):
+    template = "documents/index.html"
+    documents = Document.objects.select_related("from_doc", "where_doc").filter(
+        doc_type="ВХ"
+    )
+    context = {
+        "page_obj": paginator(documents, request),
+    }
+    return render(request, template, context)
+
+
+def document_outgoing(request):
+    template = "documents/index.html"
+    documents = Document.objects.select_related("from_doc", "where_doc").filter(
+        doc_type="ИС"
+    )
     context = {
         "page_obj": paginator(documents, request),
     }
@@ -28,8 +49,26 @@ def document_create(request):
     return render(request, template, {"form": form})
 
 
-def documents_list(request):
-    pass
+@login_required
+def document_edit(request, document_id):
+    template = "documents/create_document.html"
+    document = get_object_or_404(Document, pk=document_id)
+    if request.user != document.author:
+        return redirect("documents:document_detail", document_id=document_id)
+    form = DocumentForm(
+        request.POST or None, files=request.FILES or None, instance=document
+    )
+    if form.is_valid():
+        # form = form.save(commit=False)
+        # form.author = request.user
+        form.save()
+        return redirect("documents:document_detail", document_id=document_id)
+    context = {
+        "document": document,
+        "form": form,
+        "is_edit": True,
+    }
+    return render(request, template, context)
 
 
 def document_detail(request, document_id):
@@ -49,7 +88,3 @@ def document_detail(request, document_id):
         # 'comments': comments,
     }
     return render(request, template, context)
-
-
-def documents_archive(request):
-    pass

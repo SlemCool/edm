@@ -1,42 +1,45 @@
 <header>
   {% load static %}
   {% with request.resolver_match.view_name as view_name %}
-  <nav class="navbar navbar-expand-lg navbar-light" style="background-color: lightskyblue">
+  <!-- Fixed navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark">
     <div class="container">
       <a class="navbar-brand" href="{% url 'documents:index' %}">
         <img src="{% static 'img/logo.png' %}" width="30" height="30" class="d-inline-block align-top" alt="">
-        <span style="color:black">СПБ №7</span>
+        <span style="color:white">СПБ №7</span>
       </a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent"
-        aria-controls="navbarContent" aria-expanded="false">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
 
-    <div class="collapse navbar-collapse" id="navbarContent">
-      <ul class="navbar-nav nav-pills ms-auto mb-2">
+      <div class="collapse navbar-collapse" id="navbarCollapse">
         {% if user.is_authenticated %}
-        <li class="nav-item">
-          <a type="button" class="btn btn-success" href="{% url 'documents:document_create' %}">Новый документ</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link link-light" href="{% url 'users:password_change' %}">Изменить пароль</a>
-        </li>
-        <li class="nav-item">
-          <form method="post" action="{% url 'users:logout' %}">
-            {% csrf_token %}
-            <button class="btn btn-danger">Выйти</button>
-          </form>
-        </li>
-        {% else %}
-        <li class="nav-item">
-          <a class="btn btn-warning" href="{% url 'users:login' %}">Войти</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link link-light" href="{% url 'users:signup' %}">Регистрация</a>
-        </li>
-        {% endif %}
-      </ul>
-    </div>
+        <ul class="navbar-nav me-auto mb-2 mb-md-0">
+          <li class="nav-item">
+            <a class="btn btn-outline-success me-2" aria-current="page" href="{% url 'documents:document_create' %}">Новый документ</a>
+          </li>
+        </ul>
+        <ul class="navbar-nav me-auto mb-2 mb-md-0">
+          <li class="nav-item">
+            <form class="d-flex">
+              <input class="form-control me-2" type="search" placeholder="Поиск..." aria-label="Search">
+            </form>
+          </li>
+          <li class="nav-item">
+            <form method="post" action="{% url 'users:logout' %}">
+              {% csrf_token %}
+              <button class="btn btn-outline-danger me-2">Выйти</button>
+            </form>
+          </li>
+          <li class="nav-item">
+            <a type="button" class="btn btn-warning me-2" href="{% url 'users:password_change' %}">Изменить пароль</a>
+          </li>
+        </ul>
+          {% else %}
+            <a type="button" class="btn btn-outline-success me-2" href="{% url 'users:login' %}">Войти</a>
+            <a type="button" class="btn btn-warning me-2" href="{% url 'users:signup' %}">Регистрация</a>
+          {% endif %}
+      </div>
     </div>
   </nav>
   {% endwith %}

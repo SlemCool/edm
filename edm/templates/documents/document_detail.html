@@ -1,6 +1,5 @@
 {% extends "base.html" %}
-{% load thumbnail %}
-{% block title %}Пост {{ post.text|slice:":30" }}{% endblock title %}
+{% block title %}Документ-{{ document.pk }}{% endblock title %}
 {% block content %}
   <div class="row">
     <aside class="col-12 col-md-3">
@@ -8,32 +7,22 @@
         <li class="list-group-item">Дата публикации: {{ post.pub_date|date:"d E Y" }}</li>
         <li class="list-group-item">
           {% if post.group %}
-            Группа: <a href="{% url 'posts:group_list' post.group.slug %}">{{ post.group.title }}</a>-
+            {% comment %} Группа: <a href="{% url 'posts:group_list' post.group.slug %}">{{ post.group.title }}</a>- {% endcomment %}
             {{ post.group.description }}
           {% else %}
             Группа: не выбрана
           {% endif %}
         </li>
         <li class="list-group-item">
-          Автор: <a href="{% url 'posts:profile' post.author %}">{{ post.author.get_full_name }}</a>
+          {% comment %} Автор: <a href="{% url 'posts:profile' post.author %}">{{ post.author.get_full_name }}</a> {% endcomment %}
         </li>
         <li class="list-group-item d-flex justify-content-between align-items-center">
           Всего постов автора: <span>{{ post.author.posts.count }}</span>
         </li>
-        <li class="list-group-item">
-          <a href="{% url 'posts:profile' post.author %}">все посты пользователя</a>
-        </li>
+        {% if document.author == request.user %}
+          <a class="btn btn-primary" href="{% url 'documents:document_edit' document.pk %}">редактировать запись</a>
+        {% endif %}
       </ul>
     </aside>
-    <article class="col-12 col-md-9">
-      {% thumbnail post.image "960x339" crop="center" upscale=True as im %}
-        <img alt="post_img" class="card-img my-2" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"/>
-      {% endthumbnail %}
-      <p>{{ post.text|linebreaks }}</p>
-      {% if post.author == request.user %}
-        <a class="btn btn-primary" href="{% url 'posts:post_edit' post.pk %}">редактировать запись</a>
-      {% endif %}
-      {% include "posts/includes/post_comments.html" %}
-    </article>
   </div>
 {% endblock content %}

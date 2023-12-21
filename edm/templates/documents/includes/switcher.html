@@ -3,28 +3,18 @@
     <div class="row my-3">
       <ul class="nav nav-tabs">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Active</a>
+          <a class="nav-link {% if view_name  == 'documents:index' %}active{% endif %}" aria-current="page" 
+            href="{% url 'documents:index' %}">Все</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Link</a>
+          <a class="nav-link {% if view_name  == 'documents:incoming' %}active{% endif %}" aria-current="page" 
+            href="{% url 'documents:incoming' %}">Входящие</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Link</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+          <a class="nav-link {% if view_name  == 'documents:outgoing' %}active{% endif %}" aria-current="page" 
+            href="{% url 'documents:outgoing' %}">Исходящие</a>
         </li>
       </ul>
-      {% comment %} <ul class="nav nav-tabs nav-pills ms-auto mb-2">
-        <li class="nav-item">
-          <a class="nav-link {% if view_name  == 'documents:index' %}active{% endif %}" href="{% url 'documents:index' %}">Все
-            авторы</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link {% if view_name  == 'posts:follow_index' %}active{% endif %}"
-            href="{% url 'posts:follow_index' %}">Избранные авторы</a>
-        </li>
-      </ul> {% endcomment %}
     </div>
   {% endif %}
 {% endwith %}

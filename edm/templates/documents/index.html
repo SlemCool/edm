@@ -2,9 +2,19 @@
 {% block title %}Документы{% endblock title %}
 {% block content %}
   {% if user.is_authenticated %}
-    <p class="text-black-50">Вы вошли как: "{{ user.username.get_full_name }}"</p>
+    <div class="alert alert-primary d-flex align-items-center mt-3" role="alert">
+      <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Info:"><use xlink:href="#info-fill"/></svg>
+      <div>
+        Вы вошли как: "{{ user.get_full_name }}"
+      </div>
+    </div>
   {% else %}
-    <p class="text-bg-danger">Для начала работы авторизуйтесь!</p>
+    <div class="alert alert-danger d-flex align-items-center mt-3" role="alert">
+      <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+      <div>
+        Для начала работы авторизуйтесь!
+      </div>
+    </div>
   {% endif %}
   {% include "documents/includes/switcher.html" %}
   <h2>Последние документы</h2>
