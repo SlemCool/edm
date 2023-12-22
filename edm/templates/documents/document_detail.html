@@ -1,28 +1,38 @@
 {% extends "base.html" %}
 {% block title %}Документ-{{ document.pk }}{% endblock title %}
 {% block content %}
-  <div class="row">
-    <aside class="col-12 col-md-3">
-      <ul class="list-group list-group-flush">
-        <li class="list-group-item">Дата публикации: {{ post.pub_date|date:"d E Y" }}</li>
-        <li class="list-group-item">
-          {% if post.group %}
-            {% comment %} Группа: <a href="{% url 'posts:group_list' post.group.slug %}">{{ post.group.title }}</a>- {% endcomment %}
-            {{ post.group.description }}
-          {% else %}
-            Группа: не выбрана
-          {% endif %}
-        </li>
-        <li class="list-group-item">
-          {% comment %} Автор: <a href="{% url 'posts:profile' post.author %}">{{ post.author.get_full_name }}</a> {% endcomment %}
-        </li>
-        <li class="list-group-item d-flex justify-content-between align-items-center">
-          Всего постов автора: <span>{{ post.author.posts.count }}</span>
-        </li>
-        {% if document.author == request.user %}
-          <a class="btn btn-primary" href="{% url 'documents:document_edit' document.pk %}">редактировать запись</a>
-        {% endif %}
-      </ul>
-    </aside>
-  </div>
+<div class="py-3 text-center border-bottom">
+  <h1> Документ - №{{ document.pk }} </h1>
+</div>
+<div class="container mt-3">
+  {% comment %} {% for row in document %} {% endcomment %}
+    {% include "documents/includes/detail_row.html" %}
+  {% comment %} {% endfor %} {% endcomment %}
+</div>
 {% endblock content %}
+
+{% comment %} Потом Удалить {% endcomment %}
+<div class="row">
+  <aside class="col-12 col-md-3">
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">Дата публикации: {{ post.pub_date|date:"d E Y" }}</li>
+      <li class="list-group-item">
+        {% if post.group %}
+          {% comment %} Группа: <a href="{% url 'posts:group_list' post.group.slug %}">{{ post.group.title }}</a>- {% endcomment %}
+          {{ post.group.description }}
+        {% else %}
+          Группа: не выбрана
+        {% endif %}
+      </li>
+      <li class="list-group-item">
+        {% comment %} Автор: <a href="{% url 'posts:profile' post.author %}">{{ post.author.get_full_name }}</a> {% endcomment %}
+      </li>
+      <li class="list-group-item d-flex justify-content-between align-items-center">
+        Всего постов автора: <span>{{ post.author.posts.count }}</span>
+      </li>
+      {% if document.author == request.user %}
+        <a class="btn btn-primary" href="{% url 'documents:document_edit' document.pk %}">Редактировать запись</a>
+      {% endif %}
+    </ul>
+  </aside>
+</div>
