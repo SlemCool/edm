@@ -71,4 +71,4 @@ local_settings.py
 .env
 *.log
 *.log.*
-media
+# media

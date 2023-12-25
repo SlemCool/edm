@@ -1,24 +1,132 @@
-  <div class="row g-2">
-    <div class="col-2">
-      <div class="p-3 border bg-light">Тип документа:</div>
-    </div>
-    <div class="col-6">
-      <div class="p-3 border bg-light">Custom column padding</div>
-    </div>
+<div class="row g-2 justify-content-md-center">
+  <div class="col-2">
+    <div class="p-3 border bg-light">Тип документа:</div>
   </div>
-  <div class="row g-2 py-3">
-    <div class="col-2">
-      <div class="p-3 border bg-light">Откуда-Куда:</div>
-    </div>
-    <div class="col-6">
-      <div class="p-3 border bg-light">Custom column padding</div>
-    </div>
+  <div class="col-8">
+    <div class="p-3 border bg-light">{{ document.get_doc_type_display }}</div>
   </div>
-  <div class="row g-2">
-    <div class="col-2">
-      <div class="p-3 border bg-light">Участок:</div>
-    </div>
-    <div class="col-6">
-      <div class="p-3 border bg-light">Custom column padding</div>
-    </div>
+</div>
+<div class="row g-2 mt-1 justify-content-md-center">
+  <div class="col-2">
+    <div class="p-3 border bg-light">Откуда:</div>
   </div>
+  <div class="col-8">
+    <div class="p-3 border bg-light">{{ document.from_doc }}</div>
+  </div>
+</div>
+<div class="row g-2 mt-1 justify-content-md-center">
+  <div class="col-2">
+    <div class="p-3 border bg-light">Куда:</div>
+  </div>
+  <div class="col-8">
+    <div class="p-3 border bg-light">{{ document.where_doc }}</div>
+  </div>
+</div>
+<div class="row g-2 mt-1 justify-content-md-center">
+  <div class="col-2">
+    <div class="p-3 border bg-light">Участок:</div>
+  </div>
+  <div class="col-8">
+    <div class="p-3 border bg-light">{{ document.area }}</div>
+  </div>
+</div>
+<div class="row g-2 mt-1 justify-content-md-center">
+  <div class="col-2">
+    <div class="p-3 border bg-light">Кто:</div>
+  </div>
+  <div class="col-8">
+    <div class="p-3 border bg-light">{{ document.who }}</div>
+  </div>
+</div>
+<div class="row g-2 mt-1 justify-content-md-center">
+  <div class="col-2">
+    <div class="p-3 border bg-light">Входящий номер:</div>
+  </div>
+  <div class="col-8">
+    <div class="p-3 border bg-light">{{ document.input_num }}</div>
+  </div>
+</div>
+<div class="row g-2 mt-1 justify-content-md-center">
+  <div class="col-2">
+    <div class="p-3 border bg-light">Исходящий номер:</div>
+  </div>
+  <div class="col-8">
+    <div class="p-3 border bg-light">{{ document.output_num }}</div>
+  </div>
+</div>
+<div class="row g-2 mt-1 justify-content-md-center">
+  <div class="col-2">
+    <div class="p-3 border bg-light">Тема документа:</div>
+  </div>
+  <div class="col-8">
+    <div class="p-3 border bg-light">{{ document.theme }}</div>
+  </div>
+</div>
+<div class="row g-2 mt-1 justify-content-md-center">
+  <div class="col-2">
+    <div class="p-3 border bg-light">Подробно:</div>
+  </div>
+  <div class="col-8">
+    <div class="p-3 border bg-light">{{ document.detail }}</div>
+  </div>
+</div>
+<div class="row g-2 mt-1 justify-content-md-center">
+  <div class="col-2">
+    <div class="p-3 border bg-light">Переданный:</div>
+  </div>
+  <div class="col-8">
+    <div class="p-3 border bg-light">{{ document.given }}</div>
+  </div>
+</div>
+<div class="row g-2 mt-1 justify-content-md-center">
+  <div class="col-2">
+    <div class="p-3 border bg-light">Файл:</div>
+  </div>
+  <div class="col-8">
+    <div class="p-3 border bg-light">{{ document.file }}</div>
+  </div>
+</div>
+<div class="row g-2 mt-1 justify-content-md-center">
+  <div class="col-2">
+    <div class="p-3 border bg-light">Размер файла:</div>
+  </div>
+  <div class="col-8">
+    <div class="p-3 border bg-light">{{ document.size }}</div>
+  </div>
+</div>
+<div class="row g-2 mt-1 justify-content-md-center">
+  <div class="col-2">
+    <div class="p-3 border bg-light">Исполнитель:</div>
+  </div>
+  <div class="col-8">
+    <div class="p-3 border bg-light">{{ document.implementers }}</div>
+  </div>
+</div>
+<div class="row g-2 mt-1 justify-content-md-center">
+  <div class="col-2">
+    <div class="p-3 border bg-light">Прочее:</div>
+  </div>
+  <div class="col-8">
+    <div class="p-3 border bg-light">{{ document.description }}</div>
+  </div>
+</div>
+<div class="row g-2 mt-1 justify-content-md-center">
+  <div class="col-2">
+    <div class="p-3 border bg-light">Дата входящего:</div>
+  </div>
+  <div class="col-8">
+    <div class="p-3 border bg-light">{{ document.date_input_doc }}</div>
+  </div>
+</div>
+<div class="row g-2 mt-1 justify-content-md-center">
+  <div class="col-2">
+    <div class="p-3 border bg-light">Дата исходящего:</div>
+  </div>
+  <div class="col-8">
+    <div class="p-3 border bg-light">{{ document.date_output_doc }}</div>
+  </div>
+</div>
+<hr class="my-4">
+<div class="text-center">
+<a class="btn btn-primary mt-2" href="{% url 'documents:document_edit' document.pk %}">Редактировать запись</a>
+</div>
