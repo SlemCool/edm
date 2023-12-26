@@ -1,4 +1,5 @@
 from django.contrib.auth.decorators import login_required
+from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
 
 from .forms import DocumentForm
@@ -6,7 +7,7 @@ from .models import Document
 from .utils import paginator
 
 
-def index(request):
+def index(request) -> HttpResponse:
     template = "documents/index.html"
     documents = Document.objects.select_related("from_doc", "where_doc").all()
     context = {

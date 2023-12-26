@@ -61,7 +61,7 @@ local_settings.py
 *.sublime-project
 *.sublime-workspace
 
-.vscode/
+# .vscode/
 *.code-workspace
 
 # Local History for Visual Studio Code

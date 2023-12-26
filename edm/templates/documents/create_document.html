@@ -1,11 +1,11 @@
-{% extends "base.html" %}
+{% extends 'base.html' %}
 {% block title %}
   {% if is_edit %}
     Редактировать запись
   {% else %}
     Добавить запись
   {% endif %}
-{% endblock title %}
+{% endblock %}
 {% block content %}
   {% load user_filters %} {# Загружаем фильтры #}
   <div class="row justify-content-center">
@@ -17,23 +17,23 @@
           <div class="card-header">Новый пост</div>
         {% endif %}
         <div class="card-body">
-          {% include "includes/form_errors.html" %}
+          {% include 'includes/form_errors.html' %}
           <form method="post" enctype="multipart/form-data">
-          {% csrf_token %}
-          
-          {% include "includes/field_form.html" %}
-          <div class="d-flex justify-content-end">
-            <button type="submit" class="btn btn-primary">
-              {% if is_edit %}
-                Сохранить
-              {% else %}
-                Добавить
-              {% endif %}
-            </button>
-          </div>
+            {% csrf_token %}
+
+            {% include 'includes/field_form.html' %}
+            <div class="d-flex justify-content-end">
+              <button type="submit" class="btn btn-primary">
+                {% if is_edit %}
+                  Сохранить
+                {% else %}
+                  Добавить
+                {% endif %}
+              </button>
+            </div>
           </form>
         </div> <!-- card body -->
       </div> <!-- card -->
     </div> <!-- col -->
   </div> <!-- row -->
-{% endblock content %}
+{% endblock %}
