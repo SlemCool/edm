@@ -32,8 +32,6 @@
         "cms",
         "wagtail"
     ],
-
-
     "[django-html]": {
         "editor.defaultFormatter": "junstyle.vscode-django-support",
         "editor.formatOnSave": true,

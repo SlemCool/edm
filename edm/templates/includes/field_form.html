@@ -1,15 +1,7 @@
-{% comment %}
-Оформление одиночного поля формы.
-{% endcomment %}
+{% comment %}Оформление одиночного поля формы.{% endcomment %}
 {% load user_filters %} {# Загружаем фильтры #}
 {% for field in form %}
-  <div class="form-group row my-3"
-    {% if field.field.required %}
-    aria-required="true"
-    {% else %}
-    aria-required="false"
-    {% endif %}
-  >
+  <div class="form-group row my-3" aria-required="{{ field.field.required }}">
     <label for="{{ field.id_for_label }}">
       {{ field.label }}
       {% if field.field.required %}
@@ -20,9 +12,7 @@
       {{ field|addclass:'form-control' }}
       {% include 'includes/form_errors.html' %}
       {% if field.help_text %}
-        <small id="{{ field.id_for_label }}-help" class="form-text text-muted">
-          {{ field.help_text|safe }}
-        </small>
+        <small id="{{ field.id_for_label }}-help" class="form-text text-muted">{{ field.help_text|safe }}</small>
       {% endif %}
     </div>
   </div>
