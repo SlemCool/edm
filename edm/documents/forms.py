@@ -26,6 +26,9 @@ class DocumentForm(forms.ModelForm):
             "date_input_doc",
             "date_output_doc",
         ]
+        # widgets = {
+        #     "date_input_doc": forms.DateInput(),
+        # }
 
     def clean_text(self):
         description = self.cleaned_data["description"]
