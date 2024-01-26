@@ -1,4 +1,5 @@
 from django import template
+from documents.models import Theme
 
 register = template.Library()
 
@@ -14,3 +15,8 @@ def add_placeholder(field, placeholder=None):
         placeholder if placeholder is not None else field.field.help_text
     )
     return field
+
+
+@register.simple_tag()
+def tag_themes():
+    return Theme.objects.all()

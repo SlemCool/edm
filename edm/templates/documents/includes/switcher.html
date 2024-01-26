@@ -3,16 +3,13 @@
     <div class="row my-3">
       <ul class="nav nav-tabs">
         <li class="nav-item">
-          <a class="nav-link {% if view_name  == 'documents:index' %}active{% endif %}" aria-current="page" 
-            href="{% url 'documents:index' %}">Все</a>
+          <a class="nav-link {% if view_name == 'documents:index' %}{% endif %}" aria-current="page" href="{% url 'documents:index' %}">Все</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link {% if view_name  == 'documents:incoming' %}active{% endif %}" aria-current="page" 
-            href="{% url 'documents:incoming' %}">Входящие</a>
+          <a class="nav-link {% if view_name == 'documents:incoming' %}{% endif %}" aria-current="page" href="{% url 'documents:incoming' %}">Входящие</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link {% if view_name  == 'documents:outgoing' %}active{% endif %}" aria-current="page" 
-            href="{% url 'documents:outgoing' %}">Исходящие</a>
+          <a class="nav-link {% if view_name == 'documents:outgoing' %}{% endif %}" aria-current="page" href="{% url 'documents:outgoing' %}">Исходящие</a>
         </li>
       </ul>
     </div>

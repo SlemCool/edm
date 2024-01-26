@@ -10,6 +10,8 @@ from .utils import paginator
 def index(request) -> HttpResponse:
     template = "documents/index.html"
     documents = Document.objects.select_related("from_doc", "where_doc").all()
+    if request.GET:
+        documents = Document.objects.filter(id=2)
     context = {
         "page_obj": paginator(documents, request),
     }
