@@ -7,49 +7,13 @@
     {% tag_themes as themes %}
     {% for theme in themes %}
     <div class="form-check form-switch mx-3">
-      <input class="form-check-input" type="checkbox" name="{{ theme.id }}" id="flexSwitchCheckDefault" value="on">
-      <label class="form-check-label" for="flexSwitchCheckDefault">{{ theme.name }}</label>
-      {% if theme.id in request.GET  %} CHECKED {%else %} {{ request.GET }} {% endif %}
+      <input class="form-check-input" type="checkbox" name="{{ theme.name|strip_tags }}" id="flexSwitchCheckDefault" value="{{ theme.id }}" {% if theme.name|strip_tags in request.GET  %} checked {% endif %}>
+      {% comment %} {% if request.GET.q %}
+          <input type="hidden" name="q" value="{{ request.GET.q }}">
+      {% endif %} {% endcomment %}
+      <label class="form-check-label" for="flexSwitchCheckDefault">{{ theme.name|truncatechars:17 }}</label>
     </div>
     {% endfor %}
     <button type="submit" class="btn btn-primary mx-3 mt-3">Применить</button>
   </form>
-  {% comment %} <form action="{% if request.GET.q %}{% url "documents:search" %}{% else %}{% url "documents:index" %}{% endif %}" method="get" class="dropdown-menu bg-dark" data-bs-theme="dark">
-      <div class="form-check text-white mx-3">
-        {% tag_themes as themes %}
-        {% for theme in themes %}
-          <input class="form-check-input" type="checkbox" name="{{ theme }}" id="flexCheckDefault" value="on" {% if request.GET.theme == 'on' %}checked{% endif %}>
-          {% if request.GET.q %}
-              <input type="hidden" name="q" value="{{ request.GET.q }}">
-          {% endif %}
-          <label class="form-check-label" for="flexCheckDefault">
-              {{ theme }}
-              <hr/>
-          </label>
-        {% endfor %}
-      </div>
-      <button type="submit" class="btn btn-primary mx-3 mt-3">Применить</button>
-    </form> {% endcomment %}
 </div>
-{% comment %} <p class="text-white mx-3 mt-3">Сортировать:</p>
-<div class="form-check text-white mx-3">
-<input class="form-check-input" type="radio" name="order_by" id="flexRadioDefault1" value="default"
-{% if not request.GET.order_by or request.GET.order_by == 'default' %}checked{% endif %}>
-<label class="form-check-label" for="flexRadioDefault1">
-По умолчанию
-</label>
-</div>
-<div class="form-check text-white mx-3">
-<input class="form-check-input" type="radio" name="order_by" id="flexRadioDefault2" value="price" 
-{% if request.GET.order_by == 'price' %}checked{% endif %}>
-<label class="form-check-label" for="flexRadioDefault2">
-От дешевых к дорогим
-</label>
-</div>
-<div class="form-check text-white mx-3">
-<input class="form-check-input" type="radio" name="order_by" id="flexRadioDefault3" value="-price"
-{% if request.GET.order_by == '-price' %}checked{% endif %}>
-<label class="form-check-label" for="flexRadioDefault3">
-От дорогих к дешевым
-</label>
-</div> {% endcomment %}

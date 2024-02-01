@@ -29,8 +29,12 @@ class DocumentForm(forms.ModelForm):
         ]
         widgets = {
             "description": forms.Textarea(attrs={"rows": 5}),
-            "date_input_doc": forms.DateInput(attrs={"type": "date"}),
-            "date_output_doc": forms.DateInput(attrs={"type": "date"}),
+            "date_input_doc": forms.DateInput(
+                format=("%Y-%m-%d"), attrs={"type": "date"}
+            ),
+            "date_output_doc": forms.DateInput(
+                format=("%Y-%m-%d"), attrs={"type": "date"}
+            ),
         }
 
     def clean_text(self):

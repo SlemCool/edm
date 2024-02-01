@@ -20,3 +20,8 @@ def add_placeholder(field, placeholder=None):
 @register.simple_tag()
 def tag_themes():
     return Theme.objects.all()
+
+
+@register.filter()
+def strip_tags(field):
+    return field.strip()

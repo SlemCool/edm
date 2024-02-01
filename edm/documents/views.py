@@ -11,9 +11,16 @@ def index(request) -> HttpResponse:
     template = "documents/index.html"
     documents = Document.objects.select_related("from_doc", "where_doc").all()
     if request.GET:
-        documents = Document.objects.filter(id=2)
+        user_filters = []
+        for key, value in request.GET.items():
+            if key == "page":
+                continue
+            user_filters.append(value)
+        if user_filters:
+            documents = documents.filter(theme_id__in=user_filters)
     context = {
         "page_obj": paginator(documents, request),
+        "documents_count": documents.count()
     }
     return render(request, template, context)
 

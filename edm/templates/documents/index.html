@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load user_filters %}
 {% block title %}Документы{% endblock title %}
 {% block content %}
   {% if user.is_authenticated %}
@@ -22,7 +23,7 @@
   {% include "documents/includes/filters.html" %}
   <hr/>
   <table class="table table-hover">
-    <caption>Список документов</caption>
+    <caption>Документов на странице <b>{{ page_obj|length }}</b> из <b>{{ documents_count }}</b></caption>
     <thead>
       <tr>
         <th scope="col">#</th>
